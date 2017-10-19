@@ -10,6 +10,8 @@ import UIKit
 
 class TableViewController: UITableViewController {
     @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var profileView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,12 @@ class TableViewController: UITableViewController {
 
     @objc func refresh(_ sender: Any) {
         refreshControl?.endRefreshing()
+    }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let bottomRight = profileView.convert(profileView.bounds, to: nil)
+        let frameInWindow = CGRect(x: 0, y: 0, width: bottomRight.maxX, height: bottomRight.maxY)
+        backgroundImageView.frame = backgroundImageView.superview!.convert(frameInWindow, from: nil)
     }
 }
 

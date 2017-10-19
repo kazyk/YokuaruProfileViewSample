@@ -77,7 +77,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="7oI-52-JJS"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="Pls-zH-rAN" id="CIH-a4-Cvg"/>
                         <outlet property="iconView" destination="B4H-6H-pao" id="FHO-y9-vZI"/>
+                        <outlet property="profileView" destination="SWN-fW-Nct" id="Ny4-QY-GO9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etc-hP-MZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
