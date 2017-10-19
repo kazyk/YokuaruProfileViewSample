@@ -12,6 +12,7 @@ class TableViewController: UITableViewController {
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageViewContainer: UIView!
+    @IBOutlet weak var effectView: UIVisualEffectView!
     @IBOutlet weak var profileView: UIView!
     
     override func viewDidLoad() {
@@ -23,6 +24,8 @@ class TableViewController: UITableViewController {
 
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .primaryActionTriggered)
+        
+        effectView.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +51,12 @@ class TableViewController: UITableViewController {
         if profileView.window == nil {
             return
         }
+        
+        effectView.alpha = max(0.0, min(1.0, -(scrollView.contentOffset.y + scrollView.adjustedContentInset.top) / 80.0))
+        
         let bottomRight = profileView.convert(profileView.bounds, to: view.window)
         let frameInWindow = CGRect(x: 0, y: 0, width: bottomRight.maxX, height: bottomRight.maxY)
         backgroundImageViewContainer.frame = backgroundImageViewContainer.superview!.convert(frameInWindow, from: view.window)
-        backgroundImageView.frame = backgroundImageViewContainer.bounds
 
         let navbar = navigationController!.navigationBar
         let navbarFrameInWindow = navbar.convert(navbar.bounds, to: view.window)
