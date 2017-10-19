@@ -11,6 +11,7 @@ import UIKit
 class TableViewController: UITableViewController {
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var backgroundImageViewContainer: UIView!
     @IBOutlet weak var profileView: UIView!
     
     override func viewDidLoad() {
@@ -35,6 +36,11 @@ class TableViewController: UITableViewController {
         navbar.shadowImage = UIImage()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollViewDidScroll(tableView)
+    }
+
     @objc func refresh(_ sender: Any) {
         refreshControl?.endRefreshing()
     }
@@ -42,7 +48,8 @@ class TableViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let bottomRight = profileView.convert(profileView.bounds, to: nil)
         let frameInWindow = CGRect(x: 0, y: 0, width: bottomRight.maxX, height: bottomRight.maxY)
-        backgroundImageView.frame = backgroundImageView.superview!.convert(frameInWindow, from: nil)
+        backgroundImageViewContainer.frame = backgroundImageViewContainer.superview!.convert(frameInWindow, from: nil)
+        backgroundImageView.frame = backgroundImageViewContainer.bounds
     }
 }
 
