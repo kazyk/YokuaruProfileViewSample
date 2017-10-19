@@ -22,8 +22,19 @@ class TableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .primaryActionTriggered)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        UIApplication.shared.statusBarStyle = .lightContent
+        let navbar = navigationController!.navigationBar
+        navbar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navbar.setBackgroundImage(UIImage(), for: .default)
+        navbar.shadowImage = UIImage()
+    }
 
     @objc func refresh(_ sender: Any) {
         refreshControl?.endRefreshing()
     }
 }
+
