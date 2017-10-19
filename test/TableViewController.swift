@@ -18,6 +18,12 @@ class TableViewController: UITableViewController {
         iconView.layer.borderColor = UIColor.white.cgColor
         iconView.layer.cornerRadius = 3
         iconView.layer.borderWidth = 2
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .primaryActionTriggered)
     }
 
+    @objc func refresh(_ sender: Any) {
+        refreshControl?.endRefreshing()
+    }
 }
